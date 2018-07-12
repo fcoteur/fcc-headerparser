@@ -7,9 +7,12 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "accept-language": "^3.0.18",
+    "accept-language-parser": "^1.5.0",
     "cors": "^2.8.4",
     "express": "^5.0.0-alpha.6",
-    "os": "^0.1.1"
+    "os": "^0.1.1",
+    "user-agent": "^1.0.4"
   },
   "engines": {
     "node": "4.4.5"

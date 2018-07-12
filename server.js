@@ -24,13 +24,25 @@ app.get("/", function (req, res) {
 const os = require('os');
 let interfaces = os.networkInterfaces();
 
+const acceptLanguage = require('accept-language');
+acceptLanguage.languages(['en-US']);
+console.log(acceptLanguage.get('en-GB,en;q=0.8'));
+
+var userAgent = require('user-agent');
+let ua = userAgent.parse("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36")
+
 app.get("/api/whoami", function (req, res) {
   let output ={};
+  // add the IP
   Object.keys(interfaces).forEach(element => {
     for (let i of interfaces[element]) {
       if (i.internal == false && i.family == "IPv4") output.ipaddress = i.address;
-    }
-    
+    }  
+  // add languages
+  output.language = acceptLanguage.get('en-GB,en;q=0.8');
+  // add useragent
+  output.software = ua.full;
+
   });
   
   res.json(output);
